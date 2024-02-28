@@ -4,8 +4,10 @@
 #   of the basic principle of MENACE in Python 3.
 # see: https://en.wikipedia.org/wiki/Matchbox_Educable_Noughts_and_Crosses_Engine
 # TODO:
-# - make sure there's always 2 beads (pick random open tiles)
-# - fix top-right-bottom-left diagonal on player not detecting
+# create a seperate module for MENACE functions (save, load, train, etc)
+# create a python package definition/setup
+# create a __main__ executable, allowing users to either import MENACE itself, or play tic-tac-toe against MENACE based on import or run
+# final tweaks
 from time import sleep
 from os.path import exists
 from os import system, name
