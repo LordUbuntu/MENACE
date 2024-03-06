@@ -7,6 +7,7 @@
 # create a python package definition/setup
 # create a __main__ executable, allowing users to either import MENACE itself, or play tic-tac-toe against MENACE based on import or run
 # final tweaks
+from __init__ import *
 from time import sleep
 from random import choice
 
@@ -31,7 +32,9 @@ def board_string(board_state):
     return ''.join(CHAR_MAP[n] for n in board_state)
 
 
-def show_board(board_state):
+def show_board(generation, board_state):
+    clear()
+    print("===== MENACE gen {} =====".format(generation))
     board = board_string(board_state)
     for i in range(2):
         print('|'.join(board[i * 3 : i * 3 + 3]))
@@ -68,7 +71,7 @@ def winner(board_state):
 
 def main():
     # retrieve any memory if it exists
-    matchboxes = load()
+    generation, matchboxes = load("matchboxes.json")
     # start the game
     game_running = True
     while game_running:
@@ -77,8 +80,7 @@ def main():
         # add a random bead for a tie
         if len(open_tiles) <= 0:
             # show the board state
-            clear()
-            show_board(board_state)
+            show_board(generation, board_state)
             # add TIE beads to everything anyways
             for bead, state in actions:
                 for _ in range(TIE):
@@ -90,8 +92,7 @@ def main():
         # MENACE TAKES ITS TURN
 
         # show board state before
-        clear()
-        show_board(board_state)
+        show_board(generation, board_state)
         sleep(DELAY)
         # generate a matchbox if it doesn't exist for this board state
         if board_string(board_state) not in matchboxes:
@@ -112,8 +113,7 @@ def main():
         # menace updates board state with its move
         board_state[bead] = MENACE
         # show decision
-        clear()
-        show_board(board_state)
+        show_board(generation, board_state)
 
         # CHECK FOR MENACE WIN
 
@@ -122,13 +122,11 @@ def main():
         # reward MENACE for winning (more of the same beads)
         if win == MENACE:
             # show the board state
-            clear()
-            show_board(board_state)
+            show_board(generation, board_state)
             # add REWARD beads in the states that realized the win
             for bead, state in actions:
                 for _ in range(REWARD):
                     matchboxes[state].append(bead)
-            print(board_state, winner(board_state), open_tiles)
             # show MENACE win
             print("===== MENACE WINS =====")
             break
@@ -138,8 +136,7 @@ def main():
         # add a random bead for a tie
         if len(open_tiles) <= 0:
             # show the board state
-            clear()
-            show_board(board_state)
+            show_board(generation, board_state)
             # add TIE beads to everything anyways
             for bead, state in actions:
                 for _ in range(TIE):
@@ -155,8 +152,7 @@ def main():
         valid_input = False
         while not valid_input:
             # display board state after MENACE move before player move
-            clear()
-            show_board(board_state)
+            show_board(generation, board_state)
             try:
                 X = int(input("""
                 1|2|3
@@ -183,8 +179,7 @@ def main():
         win = winner(board_state)
         if win == PLAYER:
             # show the board state
-            clear()
-            show_board(board_state)
+            show_board(generation, board_state)
             # remove PUNISH beads in the states that realized the loss
             for bead, state in actions:
                 for _ in range(PUNISH):
@@ -198,8 +193,7 @@ def main():
         # add a random bead for a tie
         if len(open_tiles) <= 0:
             # show the board state
-            clear()
-            show_board(board_state)
+            show_board(generation, board_state)
             # add TIE beads to everything anyways
             for bead, state in actions:
                 for _ in range(TIE):
@@ -209,7 +203,7 @@ def main():
             break
 
     # store any learned memory
-    save(matchboxes)
+    save("matchboxes.json", generation + 1, matchboxes)
 
 
 

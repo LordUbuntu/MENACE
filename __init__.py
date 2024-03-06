@@ -30,7 +30,7 @@ def save(filename, generation, matchboxes):
     """
     save(filename, generation, matchboxes)
 
-    Serialize [generation, matchboxes] for persistent storage.
+    Serialize current [generation, matchboxes] for persistent storage.
     """
     with open(filename, "w") as file:
         try:
@@ -45,11 +45,14 @@ def load(filename):
 
     Deserialize a json file and return [generation, matchboxes]
         stored within it. For persistent memory of MENACE.
+    If no file exists, return default struct definitions instead.
     """
     if os.path.exists(filename):
         with open(filename, "r") as file:
             generation, matchboxes = json.load(file)
     else:
+        generation = 0
+        matchboxes = { "         ": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
     return [generation, matchboxes]
 
 
