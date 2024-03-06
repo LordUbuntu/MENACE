@@ -13,6 +13,7 @@ from os.path import exists
 from os import system, name
 from random import choice
 import json  # for persistent memory
+# import .
 
 
 DELAY = 0.5  # number of seconds to wait before displaying MENACE's move
