@@ -4,7 +4,6 @@
 #   of the basic principle of MENACE in Python 3.
 # see: https://en.wikipedia.org/wiki/Matchbox_Educable_Noughts_and_Crosses_Engine
 # TODO:
-# create a seperate module for MENACE functions (save, load, train, etc)
 # create a python package definition/setup
 # create a __main__ executable, allowing users to either import MENACE itself, or play tic-tac-toe against MENACE based on import or run
 # final tweaks
@@ -12,8 +11,6 @@ from time import sleep
 from os.path import exists
 from os import system, name
 from random import choice
-import json  # for persistent memory
-# import .
 
 
 DELAY = 0.5  # number of seconds to wait before displaying MENACE's move
@@ -69,22 +66,6 @@ def show_board(board_state):
     print('|'.join(board[6:9]))
 
 
-def load_memory():
-    # load memory if it exists
-    if exists("matchboxes.json"):
-        with open("matchboxes.json", "r") as file:
-            matchboxes = json.load(file)
-    # otherwise use default empty head
-    else:
-        matchboxes = { "         ": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
-    return matchboxes
-
-
-def save_memory(matchboxes):
-    with open("matchboxes.json", "w") as file:
-        json.dump(matchboxes, file)
-
-
 def winner(board_state):
     # I love snake lang 🐍
     for i in range(3):
@@ -114,7 +95,7 @@ def winner(board_state):
 
 def main():
     # retrieve any memory if it exists
-    matchboxes = load_memory()
+    matchboxes = load()
     # start the game
     game_running = True
     while game_running:
@@ -255,7 +236,7 @@ def main():
             break
 
     # store any learned memory
-    save_memory(matchboxes)
+    save(matchboxes)
 
 
 
