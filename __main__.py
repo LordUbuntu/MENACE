@@ -8,8 +8,6 @@
 # create a __main__ executable, allowing users to either import MENACE itself, or play tic-tac-toe against MENACE based on import or run
 # final tweaks
 from time import sleep
-from os.path import exists
-from os import system, name
 from random import choice
 
 
@@ -48,10 +46,10 @@ matchboxes = {
 
 
 def clear():
-    if name == 'nt':
-        system('cls')
+    if os.name == 'nt':
+        os.system('cls')
     else:
-        system('clear')
+        os.system('clear')
 
 
 def board_string(board_state):
