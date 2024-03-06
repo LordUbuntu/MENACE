@@ -1,13 +1,18 @@
+import json  # for persistent memory
 
 
-def save(file, matchboxes, generation):
+def save(filename, matchboxes, generation):
     """
-    save(file, matchboxes, generation)
+    save(filename, matchboxes, generation)
 
     Serialize the matchboxes and generation number to enable
         persistent memory of MENACE.
     """
-    pass
+    with open(filename, "w") as file:
+        try:
+            json.dump([generation, matchboxes], file)
+        except:
+            print("failed to save to {}".format(filename))
 
 
 def load(file):
