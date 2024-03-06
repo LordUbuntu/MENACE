@@ -2,9 +2,33 @@ import json  # for persistent memory
 import os
 
 
-def save(filename, matchboxes, generation):
+
+
+
+# what square "colors" are open on the current board state
+open_tiles = [*range(9)]
+# constants representing each player occupancy with a number
+NO_ONE = 0
+MENACE = 1
+PLAYER = 2
+# which tile is occupied by which player
+board_state = [NO_ONE] * 9
+# constants representing the number of beads added/removed in learning
+REWARD = 2
+TIE = 1
+PUNISH = 1
+# which bead was picked for which board state represented as a list of tuples of (bead_number, board_state), for learning
+actions = []
+# the "neural network" of MENACE. Represents each board state as a hashable string with a corresponding list reprensenting the matchbox of beads
+matchboxes = { "         ": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
+# the current generation of MENACE
+generation = 0
+# interesting note: move order doesn't need to be remembered, only the choice for each board state
+
+
+def save(filename, generation, matchboxes):
     """
-    save(filename, matchboxes, generation)
+    save(filename, generation, matchboxes)
 
     Serialize [generation, matchboxes] for persistent storage.
     """
@@ -26,8 +50,6 @@ def load(filename):
         with open(filename, "r") as file:
             generation, matchboxes = json.load(file)
     else:
-        generation = 0
-        matchboxes = { "         ": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
     return [generation, matchboxes]
 
 

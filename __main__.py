@@ -13,36 +13,11 @@ from random import choice
 
 DELAY = 0.5  # number of seconds to wait before displaying MENACE's move
 
-
-REWARD = 2
-TIE = 1
-PUNISH = 1
-
-
-NO_ONE = 0
-MENACE = 1
-PLAYER = 2
 CHAR_MAP = {
     NO_ONE: ' ',
     MENACE: 'O',
     PLAYER: 'X',
 }
-open_tiles = [*range(9)]  # tiles that can still be selected from
-board_state = [0] * 9
-actions = []    # A list of tuples to remember which beads were chosen
-                #   from which board state. Ephemeral, lifetime is the
-                #   span of the current game only.
-                # (bead_number, board_state)
-# MENACE memory, the matchboxes.
-#   Chooses a random bead based on board state.
-#   Each bead is a number representing a possible tile, 9 choices are
-#   generated based on what tiles are open, basically just a range of all
-#   open spaces on novel board states
-matchboxes = {
-    "         ": [0, 1, 2, 3, 4, 5, 6, 7, 8],
-}
-# TODO: add a way to record the number of generations the memory has trained through and display that
-# NOTE: interestingly, don't need to remember move order or number at all!
 
 
 def clear():
