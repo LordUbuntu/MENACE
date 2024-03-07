@@ -63,4 +63,38 @@ def learn(matchboxes, winner):
     Backpropogate and reinforce winning/tie beads to help MENACE
         learn what moves work well for it and what moves do not.
     """
+        # # punish MENACE for losing (remove beads from matchboxes)
+        # win = winner(board_state)
+        # if win == PLAYER:
+        #     # show the board state
+        #     show_board(generation, board_state)
+        #     # remove PUNISH beads in the states that realized the loss
+        #     for bead, state in actions:
+        #         for _ in range(PUNISH):
+        #             matchboxes[state].remove(bead)
+        #     # show player win
+        #     print("===== YOU WIN =====")
+        #     break
+        # # reward MENACE for winning (more of the same beads)
+        # if win == MENACE:
+        #     # show the board state
+        #     show_board(generation, board_state)
+        #     # add REWARD beads in the states that realized the win
+        #     for bead, state in actions:
+        #         for _ in range(REWARD):
+        #             matchboxes[state].append(bead)
+        #     # show MENACE win
+        #     print("===== MENACE WINS =====")
+        #     break
+        # # add a random bead for a tie
+        # if len(open_tiles) <= 0:
+        #     # show the board state
+        #     show_board(generation, board_state)
+        #     # add TIE beads to everything anyways
+        #     for bead, state in actions:
+        #         for _ in range(TIE):
+        #             matchboxes[state].append(bead)
+        #     # show tie
+        #     print("===== TIE =====")
+        #     break
     pass
