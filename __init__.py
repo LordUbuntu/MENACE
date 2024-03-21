@@ -73,15 +73,8 @@ def learn(matchboxes, winner, actions):
         for bead, state in actions:
             for _ in range(REWARD):
                 matchboxes[state].append(bead)
-        # # add a random bead for a tie
-        # if len(open_tiles) <= 0:
-        #     # show the board state
-        #     show_board(generation, board_state)
-        #     # add TIE beads to everything anyways
-        #     for bead, state in actions:
-        #         for _ in range(TIE):
-        #             matchboxes[state].append(bead)
-        #     # show tie
-        #     print("===== TIE =====")
-        #     break
-    pass
+    if winner == NO_ONE:
+        for _, state in actions:
+            for _ in range(TIE):
+                bead = choice(matchboxes[state])
+                matchboxes[state].append(bead)
