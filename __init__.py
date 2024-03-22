@@ -63,16 +63,20 @@ def learn(matchboxes, winner, actions):
     Backpropogates learned information into matchboxes based on who
         the winner is using move informtion from actions.
     """
-    # punish MENACE for losing against the player by taking some
-    #   beads from the matchboxes used during the game.
+    # punish MENACE by taking away some of the bead colours used from
+    #   their matchboxes during the game
     if winner == PLAYER:
         for bead, state in actions:
             for _ in range(PUNISH):
                 matchboxes[state].remove(bead)
+    # reward MENACE by adding back more of the bead colours used from
+    #   their matchboxes during the game
     if winner == MENACE:
         for bead, state in actions:
             for _ in range(REWARD):
                 matchboxes[state].append(bead)
+    # encourage MENACE to explore more by adding more of a random bead
+    #   into each matchbox
     if winner == NO_ONE:
         for _, state in actions:
             for _ in range(TIE):
