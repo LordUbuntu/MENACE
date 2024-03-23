@@ -68,7 +68,11 @@ def learn(matchboxes, winner, actions):
     if winner == PLAYER:
         for bead, state in actions:
             for _ in range(PUNISH):
-                matchboxes[state].remove(bead)
+                # ensure there's always at least 1 bead in each matchbox
+                if len(matchboxes[state]) <= 1:
+                    matchboxes[state] = choice(open_tiles)
+                else:
+                    matchboxes[state].remove(bead)
     # reward MENACE by adding back more of the bead colours used from
     #   their matchboxes during the game
     if winner == MENACE:
