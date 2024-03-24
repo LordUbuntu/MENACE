@@ -56,7 +56,7 @@ def load(filename):
     return [generation, matchboxes]
 
 
-def learn(matchboxes, winner, actions):
+def learn(winner, matchboxes, actions, open_tiles):
     """
     learn(matchboxes, winner, actions)
 
