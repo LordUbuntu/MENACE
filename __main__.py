@@ -42,6 +42,7 @@ def show_board(generation, board_state):
     print('|'.join(board[6:9]))
 
 
+# I need to rename this to avoid confusion...
 def winner(board_state):
     # I love snake lang 🐍
     for i in range(3):
