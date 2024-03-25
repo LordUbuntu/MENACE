@@ -56,13 +56,19 @@ def load(filename):
     return [generation, matchboxes]
 
 
-def learn(matchboxes, winner):
+def learn(matchboxes, winner, actions):
     """
-    learn(matchboxes, winner)
+    learn(matchboxes, winner, actions)
 
-    Backpropogate and reinforce winning/tie beads to help MENACE
-        learn what moves work well for it and what moves do not.
+    Backpropogates learned information into matchboxes based on who
+        the winner is using move informtion from actions.
     """
+    # punish MENACE for losing against the player by taking some
+    #   beads from the matchboxes used during the game.
+    if winner == PLAYER:
+        for bead, state in actions:
+            for _ in range(PUNISH):
+                matchboxes[state].remove(bead)
         # # punish MENACE for losing (remove beads from matchboxes)
         # win = winner(board_state)
         # if win == PLAYER:
