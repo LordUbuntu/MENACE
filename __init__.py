@@ -1,3 +1,4 @@
+from random import choice
 import json  # for persistent memory
 import os
 
