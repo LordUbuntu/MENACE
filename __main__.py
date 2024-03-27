@@ -76,6 +76,8 @@ def main():
     # start the game
     game_running = True
     while game_running:
+        # TODO: begin work on checking winner and training MENACE
+
         # CHECK FOR A TIE
 
         # add a random bead for a tie
