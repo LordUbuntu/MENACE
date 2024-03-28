@@ -43,7 +43,7 @@ def show_board(generation, board_state):
 
 
 # I need to rename this to avoid confusion...
-def winner(board_state):
+def winning_player(board_state):
     # I love snake lang 🐍
     for i in range(3):
         # check for rows
@@ -70,13 +70,24 @@ def winner(board_state):
     return NO_ONE
 
 
+def newmain():
+    # retrieve any memory if it exists
+    generation, matchboxes = load("matchboxes.json")
+    # start the game
+    game_running = True
+    while game_running:
+        winner = winning_player(board_state)
+    pass
+
+
+
 def main():
     # retrieve any memory if it exists
     generation, matchboxes = load("matchboxes.json")
     # start the game
     game_running = True
     while game_running:
-        # TODO: begin work on checking winner and training MENACE
+        # TODO: begin work on checking winning_player and training MENACE
 
         # CHECK FOR A TIE
 
@@ -120,8 +131,8 @@ def main():
 
         # CHECK FOR MENACE WIN
 
-        # determine winners and train MENACE based on that
-        win = winner(board_state)
+        # determine winning_players and train MENACE based on that
+        win = winning_player(board_state)
         # reward MENACE for winning (more of the same beads)
         if win == MENACE:
             # show the board state
@@ -179,7 +190,7 @@ def main():
         # CHECK PLAYER WIN
 
         # punish MENACE for losing (remove beads from matchboxes)
-        win = winner(board_state)
+        win = winning_player(board_state)
         if win == PLAYER:
             # show the board state
             show_board(generation, board_state)
