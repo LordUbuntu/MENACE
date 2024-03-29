@@ -42,7 +42,6 @@ def show_board(generation, board_state):
     print('|'.join(board[6:9]))
 
 
-# I need to rename this to avoid confusion...
 def winning_player(board_state):
     # I love snake lang 🐍
     for i in range(3):
@@ -76,7 +75,21 @@ def newmain():
     # start the game
     game_running = True
     while game_running:
+        # MENACE makes their move
+        # check if MENACE won
+        #   reward menace
+        #   display win for menace
+        # player makes their move
+        # check if MENACE lost
+        #   punish menace
+        #   display lose for menace
         winner = winning_player(board_state)
+        if len(open_tiles) <= 2 && winner == NO_ONE:
+            game_running = False
+            learn(winner, matchboxes, actions, open_tiles)
+            clear()
+            print("=====TIE=====")
+            input()
     pass
 
 
