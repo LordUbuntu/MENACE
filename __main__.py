@@ -75,21 +75,51 @@ def newmain():
     # start the game
     game_running = True
     while game_running:
-        # MENACE makes their move
-        # check if MENACE won
+
+        # MENACE MOVES
+
+        # show board state before
+        show_board(generation, board_state)
+        sleep(DELAY)
+        # generate a matchbox if it doesn't exist for this board state
+        if board_string(board_state) not in matchboxes:
+            matchboxes.update({
+                board_string(board_state): [*open_tiles]
+            })
+        # generate a random bead if a matchbox is empty
+        if not matchboxes[board_string(board_state)]:
+            matchboxes.update({
+                board_string(board_state): [choice(open_tiles)]
+            })
+        # menace picks a bead from the matchbox for the current state
+        # and action is recorded for later backpropogation
+        bead = choice(matchboxes[board_string(board_state)])
+        actions.append((bead, board_string(board_state)))
+        # remove from open_tiles
+        open_tiles.remove(bead)
+        # menace updates board state with its move
+        board_state[bead] = MENACE
+        # show decision
+        show_board(generation, board_state)
+
+        # CHECK IF MENACE WON
         #   reward menace
         #   display win for menace
-        # player makes their move
-        # check if MENACE lost
+
+        # PLAYER MOVES
+
+        # CHECK IF MENACE LOST
         #   punish menace
         #   display lose for menace
+
+        # OTHERWISE TIE
         winner = winning_player(board_state)
-        if len(open_tiles) <= 2 && winner == NO_ONE:
+        if not open_tiles && winner == NO_ONE:
             game_running = False
             learn(winner, matchboxes, actions, open_tiles)
             clear()
             print("=====TIE=====")
-            input()
+            break
     pass
 
 
