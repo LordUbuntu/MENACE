@@ -103,19 +103,29 @@ def newmain():
         show_board(generation, board_state)
 
         # CHECK IF MENACE WON
-        #   reward menace
-        #   display win for menace
+
+        winner = winning_player(board_state)
+        if winner == MENACE:
+            learn(winner, matchboxes, actions, open_tiles)
+            clear()
+            print("===== MENACE WINS =====")
+            break
 
         # PLAYER MOVES
 
         # CHECK IF MENACE LOST
-        #   punish menace
-        #   display lose for menace
+
+        winner = winning_player(board_state)
+        if winner == PLAYER:
+            learn(winner, matchboxes, actions, open_tiles)
+            clear()
+            print("===== MENACE LOSES =====")
+            break
 
         # OTHERWISE TIE
+
         winner = winning_player(board_state)
         if not open_tiles && winner == NO_ONE:
-            game_running = False
             learn(winner, matchboxes, actions, open_tiles)
             clear()
             print("=====TIE=====")
@@ -130,8 +140,6 @@ def main():
     # start the game
     game_running = True
     while game_running:
-        # TODO: begin work on checking winning_player and training MENACE
-
         # CHECK FOR A TIE
 
         # add a random bead for a tie
