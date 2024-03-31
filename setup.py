@@ -7,7 +7,7 @@ with open("README.md", 'r') as readme:
 
 
 setup(
-    name="MENACE",
+    name="MENACE ANN",
     version="1.0",
     description="An implementation of the first Noughts and Crosses Artificial Neural Network, made with matchboxes and MENACE",
     long_description=long_description,
@@ -17,13 +17,13 @@ setup(
     license="MIT",
     author="Jacobus Burger",
     author_email="therealjacoburger@gmail.com",
-    packages=["menace"],
+    packages=["menaceann"],
     extras_require={
         "dev": ["pytest>=7.2", "twine>=4.0.2"],
     },
     python_requires=">=3.10",
     platforms=["any"],
-    py_modules=["menace"],
+    py_modules=["menaceann"],
     entry_points={
         "console_scripts": ["menace=meance.__main__:main"]
     },
