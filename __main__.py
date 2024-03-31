@@ -75,9 +75,15 @@ def main():
     # start the game
     game_running = True
     while game_running:
+        # OTHERWISE TIE
+        winner = winning_player(board_state)
+        if len(open_tiles) == 0 and winner == NO_ONE:
+            learn(winner, matchboxes, actions, open_tiles)
+            clear()
+            print("=====TIE=====")
+            break
 
         # MENACE MOVES
-
         # show board state before
         show_board(generation, board_state)
         sleep(DELAY)
@@ -103,16 +109,22 @@ def main():
         show_board(generation, board_state)
 
         # CHECK IF MENACE WON
-
         winner = winning_player(board_state)
         if winner == MENACE:
             learn(winner, matchboxes, actions, open_tiles)
             clear()
             print("===== MENACE WINS =====")
             break
+        # OTHERWISE TIE
+        winner = winning_player(board_state)
+        if len(open_tiles) == 0 and winner == NO_ONE:
+            learn(winner, matchboxes, actions, open_tiles)
+            clear()
+            print("=====TIE=====")
+            break
+
 
         # PLAYER MOVES
-
         # validate and retrieve player input
         # (must be int and in open_tiles)
         valid_input = False
@@ -140,22 +152,20 @@ def main():
         board_state[X] = PLAYER
 
         # CHECK IF MENACE LOST
-
         winner = winning_player(board_state)
         if winner == PLAYER:
             learn(winner, matchboxes, actions, open_tiles)
             clear()
             print("===== MENACE LOSES =====")
             break
-
         # OTHERWISE TIE
-
         winner = winning_player(board_state)
-        if not open_tiles and winner == NO_ONE:
+        if len(open_tiles) == 0 and winner == NO_ONE:
             learn(winner, matchboxes, actions, open_tiles)
             clear()
             print("=====TIE=====")
             break
+
     # store any learned info from the game
     save("matchboxes.json", generation + 1, matchboxes)
 
