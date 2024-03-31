@@ -1,2 +1,2 @@
 [console_scripts]
-menace = meance.__main__:main
+menace_ann = meance_ann.__main__:main
