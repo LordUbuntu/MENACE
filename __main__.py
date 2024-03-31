@@ -156,7 +156,8 @@ def newmain():
             clear()
             print("=====TIE=====")
             break
-    pass
+    # store any learned info from the game
+    save("matchboxes.json", generation + 1, matchboxes)
 
 
 
