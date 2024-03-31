@@ -113,6 +113,32 @@ def newmain():
 
         # PLAYER MOVES
 
+        # validate and retrieve player input
+        # (must be int and in open_tiles)
+        valid_input = False
+        while not valid_input:
+            # display board state after MENACE move before player move
+            show_board(generation, board_state)
+            try:
+                X = int(input("""
+                1|2|3
+                -+-+-
+                4|5|6
+                -+-+-
+                7|8|9
+                """))
+                X -= 1  # correct offset
+            except:
+                exit()
+            if X not in open_tiles:
+                continue
+            else:
+                valid_input = True
+        # remove from open_tiles
+        open_tiles.remove(X)
+        # update board state with player move
+        board_state[X] = PLAYER
+
         # CHECK IF MENACE LOST
 
         winner = winning_player(board_state)
