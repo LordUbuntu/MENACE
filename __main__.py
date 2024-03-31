@@ -151,7 +151,7 @@ def newmain():
         # OTHERWISE TIE
 
         winner = winning_player(board_state)
-        if not open_tiles && winner == NO_ONE:
+        if not open_tiles and winner == NO_ONE:
             learn(winner, matchboxes, actions, open_tiles)
             clear()
             print("=====TIE=====")
