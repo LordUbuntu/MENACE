@@ -3,17 +3,12 @@
 #   an early convolutional neural network. This program is a replication
 #   of the basic principle of MENACE in Python 3.
 # see: https://en.wikipedia.org/wiki/Matchbox_Educable_Noughts_and_Crosses_Engine
-# TODO:
-# create a python package definition/setup
-# create a __main__ executable, allowing users to either import MENACE itself, or play tic-tac-toe against MENACE based on import or run
-# final tweaks
 from __init__ import *
 from time import sleep
 from random import choice
 
 
 DELAY = 0.5  # number of seconds to wait before displaying MENACE's move
-
 CHAR_MAP = {
     NO_ONE: ' ',
     MENACE: 'O',
