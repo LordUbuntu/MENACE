@@ -28,7 +28,7 @@ def board_string(board_state):
 
 
 def show_board(generation, board_state):
-    clear()
+    # clear()
     print("===== MENACE gen {} =====".format(generation))
     board = board_string(board_state)
     for i in range(2):
@@ -94,6 +94,7 @@ def main():
             })
         # menace picks a bead from the matchbox for the current state
         # and action is recorded for later backpropogation
+        print("DEBUG: {} {}".format(matchboxes[board_string(board_state)], board_string(board_state)))
         bead = choice(matchboxes[board_string(board_state)])
         actions.append((bead, board_string(board_state)))
         # remove from open_tiles
