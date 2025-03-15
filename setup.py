@@ -25,10 +25,10 @@ setup(
     platforms=["any"],
     py_modules=["menace_ann"],
     entry_points={
-        "console_scripts": ["menace_ann=meance_ann.__main__:main"]
+        "console_scripts": ["menace_ann=menace_ann.__main__:main"]
     },
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 7 - Inactive",
         "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent",
         "Topic :: Games/Entertainment",
