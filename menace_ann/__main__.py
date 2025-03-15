@@ -5,7 +5,7 @@
 # see: https://en.wikipedia.org/wiki/Matchbox_Educable_Noughts_and_Crosses_Engine
 from __init__ import *
 from time import sleep
-from random import choice
+from random import choice, randint
 
 
 DELAY = 0.5  # number of seconds to wait before displaying MENACE's move
@@ -28,7 +28,7 @@ def board_string(board_state):
 
 
 def show_board(generation, board_state):
-    # clear()
+    clear()
     print("===== MENACE gen {} =====".format(generation))
     board = board_string(board_state)
     for i in range(2):
@@ -94,8 +94,10 @@ def main():
             })
         # menace picks a bead from the matchbox for the current state
         # and action is recorded for later backpropogation
-        print("DEBUG: {} {}".format(matchboxes[board_string(board_state)], board_string(board_state)))
-        bead = choice(matchboxes[board_string(board_state)])
+        if type(matchboxes[board_string(board_state)]) == int:
+            bead = randint(0, 8)
+        else:
+            bead = choice(matchboxes[board_string(board_state)])
         actions.append((bead, board_string(board_state)))
         # remove from open_tiles
         open_tiles.remove(bead)
