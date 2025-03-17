@@ -25,7 +25,8 @@ matchboxes = { "         ": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
 # the current generation of MENACE
 generation = 0
 # interesting note: move order doesn't need to be remembered, only the choice for each board state
-
+# TODO: make this relative to where script is located instead
+DATA_PATH=".local/bin/menace_ann"
 
 def save(filename, generation, matchboxes):
     """
@@ -33,11 +34,12 @@ def save(filename, generation, matchboxes):
 
     Serialize current [generation, matchboxes] for persistent storage.
     """
-    with open(filename, "w") as file:
+    path=f"{DATA_PATH}/{filename}" 
+    with open(path, "w") as file:
         try:
             json.dump([generation, matchboxes], file)
         except:
-            print("failed to save to {}".format(filename))
+            print("failed to save to {}".format(path))
 
 
 def load(filename):
@@ -48,8 +50,9 @@ def load(filename):
         stored within it. For persistent memory of MENACE.
     If no file exists, return default struct definitions instead.
     """
-    if os.path.exists(filename):
-        with open(filename, "r") as file:
+    path=f"{DATA_PATH}/{filename}"
+    if os.path.exists(path):
+        with open(path, "r") as file:
             generation, matchboxes = json.load(file)
     else:
         generation = 0
