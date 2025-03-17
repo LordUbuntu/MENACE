@@ -3,7 +3,7 @@
 #   an early convolutional neural network. This program is a replication
 #   of the basic principle of MENACE in Python 3.
 # see: https://en.wikipedia.org/wiki/Matchbox_Educable_Noughts_and_Crosses_Engine
-from __init__ import *
+from .__init__ import *
 from time import sleep
 from random import choice, randint
 
