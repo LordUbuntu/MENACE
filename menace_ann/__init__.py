@@ -25,14 +25,12 @@ matchboxes = { "         ": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
 # the current generation of MENACE
 generation = 0
 # interesting note: move order doesn't need to be remembered, only the choice for each board state
-# TODO: make this relative to where script is located instead
-# and then remove filename argument since it isn't needed after
 if os.name == "nt":
     DATA_PATH=f""
 else:
     DATA_PATH=f"/home/{os.getlogin()}/.local/bin/matchboxes.json"
 
-def save(filename, generation, matchboxes):
+def save(generation, matchboxes):
     """
     save(filename, generation, matchboxes)
 
@@ -45,9 +43,9 @@ def save(filename, generation, matchboxes):
             print("failed to save to {}".format(DATA_PATH))
 
 
-def load(filename):
+def load():
     """
-    load(filename)
+    load()
 
     Deserialize a json file and return [generation, matchboxes]
         stored within it. For persistent memory of MENACE.
