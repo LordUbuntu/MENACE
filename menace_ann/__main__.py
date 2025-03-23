@@ -97,8 +97,8 @@ def learn(winner, matchboxes, actions, open_tiles):
         for bead, state in actions:
             for _ in range(PUNISH):
                 # ensure there's always at least 1 bead in each matchbox
-                if len(matchboxes[state]) <= 1:
-                    matchboxes[state] = choice(open_tiles)
+                if type(matchboxes[state]) != list:
+                    matchboxes[state] = [randint(0, 8)]
                 else:
                     matchboxes[state].remove(bead)
     # reward MENACE by adding back more of the bead colours used from
@@ -128,6 +128,7 @@ def board_string(board_state):
 
 
 def show_board(generation, board_state):
+    sleep(DELAY)
     clear()
     print("===== MENACE gen {} =====".format(generation))
     board = board_string(board_state)
@@ -135,6 +136,7 @@ def show_board(generation, board_state):
         print('|'.join(board[i * 3 : i * 3 + 3]))
         print("-+-+-")
     print('|'.join(board[6:9]))
+    sleep(DELAY)
 
 
 def winning_player(board_state):
