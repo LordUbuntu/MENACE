@@ -8,7 +8,7 @@ with open("README.md", 'r') as readme:
 
 setup(
     name="MENACE_ANN",
-    version="1.1",
+    version="1.3",
     description="An implementation of the first Noughts and Crosses Artificial Neural Network, made with matchboxes and MENACE",
     long_description=long_description,
     long_description_content_type="text/markdown",

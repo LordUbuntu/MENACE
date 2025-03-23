@@ -11,5 +11,5 @@ pip install MENACE_ANN
 
 And to run the program simply type
 ```bash
-menace
+menace_ann
 ```
